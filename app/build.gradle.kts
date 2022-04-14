@@ -1,4 +1,4 @@
-val kodeinVersion = "7.11.0"
+val ktorVersion = "1.6.8"
 
 plugins {
     kotlin("multiplatform")
@@ -14,14 +14,22 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "domain"
+            baseName = "app"
+
+            isStatic = false
+            export(project(":data"))
+            export(project(":domain"))
+            export(project(":presentation"))
+            transitiveExport = true
         }
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("org.kodein.di:kodein-di:$kodeinVersion")
+                api(project(":data"))
+                api(project(":domain"))
+                api(project(":presentation"))
             }
         }
         val commonTest by getting {
@@ -39,6 +47,10 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+
+            dependencies {
+                api("io.ktor:ktor-client-ios:$ktorVersion")
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting

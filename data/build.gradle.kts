@@ -1,10 +1,10 @@
-val kodeinVersion = "7.11.0"
+val ktorVersion = "1.6.8"
 
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization") version "1.4.10"
     id("com.android.library")
 }
-
 kotlin {
     android()
 
@@ -14,14 +14,17 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "domain"
+            baseName = "data"
         }
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("org.kodein.di:kodein-di:$kodeinVersion")
+                implementation(project(":domain"))
+
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
             }
         }
         val commonTest by getting {
@@ -29,7 +32,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -39,6 +46,10 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+
+            dependencies {
+                api("io.ktor:ktor-client-ios:$ktorVersion")
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting
