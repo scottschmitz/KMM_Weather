@@ -1,44 +1,41 @@
 package com.sschmitz.kmm_weather.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
-import com.sschmitz.kmm.domain.contract.WeatherContract
 import com.sschmitz.kmm_weather.android.navigation.RootNavigation
 import com.sschmitz.kmm_weather.android.theme.WeatherTheme
 import org.kodein.di.DIAware
-import org.kodein.di.instance
+import org.kodein.di.android.closestDI
+import org.kodein.di.android.x.viewmodel.viewModel
 
 class MainActivity : AppCompatActivity(), DIAware {
+  override val di by closestDI()
 
+//  val weatherViewModel by lazy { ViewModelFactory(di).create(WeatherViewModel::class.java) }
 
-  private val x = ViewModelProviders.of(this).get(GitHubViewModel::class.java)
-
-  private val contract: WeatherContract by instance()
-
-  override val di by lazy { (applicationContext as App).di }
-
+  val weatherViewModel: WeatherViewModel by viewModel()
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
     setContent {
       RootView(
-          contract = contract
+          weatherViewModel = weatherViewModel
       )
     }
   }
 }
 
 @Composable
-fun RootView(contract: WeatherContract) {
+fun RootView(weatherViewModel: WeatherViewModel) {
   val navController = rememberNavController()
 
   WeatherTheme {
     RootNavigation(
       navController = navController,
-      contract = contract
+      weatherViewModel = weatherViewModel
     )
   }
 }

@@ -1,4 +1,4 @@
-val kodeinVersion = "7.11.0"
+val kodeinVersion = "7.10.0"
 
 plugins {
     kotlin("multiplatform")
@@ -22,6 +22,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api("org.kodein.di:kodein-di:$kodeinVersion")
+                api("com.jakewharton.timber:timber:5.0.1")
             }
         }
         val commonTest by getting {

@@ -6,17 +6,18 @@ import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.direct
 import org.kodein.di.instance
+import org.kodein.di.singleton
 
 object Repositories {
   val diContainer = DI.Module("Repositories") {
-    bind<WeatherContract>() with instance(WeatherRepository())
+    bind<WeatherContract>() with singleton { WeatherRepository() }
   }
 }
 
-object RepositoriesInjector {
-  val kodeInContainer = DI.lazy {
-    importAll(Repositories.diContainer)
-  }
-
-  fun weatherContract() = kodeInContainer.direct.instance<WeatherContract>()
-}
+//object RepositoriesInjector {
+//  val kodeInContainer = DI.lazy {
+//    importAll(Repositories.diContainer)
+//  }
+//
+//  fun weatherContract() = kodeInContainer.direct.instance<WeatherContract>()
+//}

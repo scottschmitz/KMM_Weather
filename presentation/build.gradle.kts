@@ -22,10 +22,6 @@ kotlin {
                 implementation(project(":domain"))
 
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
-
-                api("dev.icerock.moko:mvvm-core:0.12.0") // only ViewModel, EventsDispatcher, Dispatchers.UI
-                api("dev.icerock.moko:mvvm-livedata:0.12.0") // api mvvm-core, LiveData and extensions
-                api("dev.icerock.moko:mvvm-state:0.12.0") // api mvvm-livedata, ResourceState class and extensions
             }
         }
         val commonTest by getting {

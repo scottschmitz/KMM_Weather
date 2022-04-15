@@ -6,12 +6,14 @@ import com.sschmitz.kmm.domain.model.Forecast
 
 @Composable
 fun ForecastDetailsScreen(
-  forecast: Forecast
+  forecast: Forecast?
 ) {
   Surface {
-    ForecastOverview(
-      forecast = forecast,
-      onClick = {}
-    )
+    if (forecast != null) {
+      ForecastOverview(
+        forecast = forecast,
+        onClick = {}
+      )
+    }
   }
 }

@@ -17,22 +17,33 @@ android {
             isMinifyEnabled = false
         }
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.1"
+    }
 }
 
 dependencies {
     implementation(project(":app"))
-    implementation("org.kodein.di:kodein-di-framework-android-x:7.11.0")
+//    implementation("org.kodein.di:kodein-di-framework-android-x:7.10.0")
+    implementation("org.kodein.di:kodein-di-framework-android-x-viewmodel:7.10.0")
+    implementation("org.kodein.di:kodein-di-framework-compose:7.10.0")
 
-    implementation ("androidx.activity:activity-compose:1.3.1")
-    implementation("androidx.compose.ui:ui:1.0.0")
-    implementation("androidx.compose.material:material:1.0.0")
+    implementation ("androidx.activity:activity-compose:1.4.0")
+    implementation("androidx.compose.ui:ui:1.1.1")
+    implementation("androidx.compose.material:material:1.1.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.1.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation("com.google.android.material:material:1.5.0")
+    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+
+    implementation("io.coil-kt:coil-compose:2.0.0-rc03")
 
 
 
@@ -51,7 +62,7 @@ dependencies {
 //    // Integration with ViewModels
 //    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
 //    // Integration with observables
-    implementation("androidx.compose.runtime:runtime-livedata:1.1.1")
+
 
     implementation("androidx.navigation:navigation-compose:2.4.2")
 }
