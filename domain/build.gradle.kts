@@ -1,4 +1,4 @@
-val kodeinVersion = "7.10.0"
+val kodeinVersion = "7.11.0"
 
 plugins {
     kotlin("multiplatform")

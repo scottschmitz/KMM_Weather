@@ -20,7 +20,6 @@ fun ForecastOverview(
   forecast: Forecast,
   onClick: (Forecast) -> Unit
 ) {
-
   Card(
     modifier = Modifier
       .fillMaxWidth()

@@ -1,7 +1,8 @@
-package com.sschmitz.kmm.data.di
+package com.sschmitz.kmm_weather.data.di
 
 import com.sschmitz.kmm.domain.contract.WeatherContract
 import com.sschmitz.kmm.data.repository.WeatherRepository
+import io.ktor.util.reflect.*
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.direct
@@ -14,10 +15,10 @@ object Repositories {
   }
 }
 
-//object RepositoriesInjector {
-//  val kodeInContainer = DI.lazy {
-//    importAll(Repositories.diContainer)
-//  }
-//
-//  fun weatherContract() = kodeInContainer.direct.instance<WeatherContract>()
-//}
+object RepositoriesInjector {
+  val kodeInContainer = DI.lazy {
+    importAll(Repositories.diContainer)
+  }
+
+  fun weatherContract() = kodeInContainer.direct.instance<WeatherContract>()
+}
