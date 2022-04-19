@@ -5,31 +5,34 @@ struct ContentView: View {
 
 	let greet = Greeting().greeting()
 
-    @State var fullForecast: [Forecast] = []
+    @State var forecastState: ForecastState = ForecastState.Initial()
 
 	var body: some View {
-        List(self.fullForecast, id: \.name) { forecast in
-            CardView(forecast: forecast)
-        }
-        .onAppear {
-            observeForecasts()
+        switch forecastState {
+        case is ForecastState.Initial:
+            LoadingView().onAppear {
+                observeForecasts()
+            }
+        case is ForecastState.Loading:
+            LoadingView()
+        case is ForecastState.Loaded:
+            let fullForecast = (forecastState as! ForecastState.Loaded).fullForecast
+            LoadedView(fullForecast: fullForecast.forecasts)
+        case is ForecastState.Failed:
+            FailedView()
+        default:
+            Text("default")
         }
 	}
 
    func observeForecasts() {
-//       let viewModel = ViewModelInjector().forecastViewModel()
-//       viewModel.forecastStateLiveData
-//           .addObserver { state in
-//               print("State go here: \(String(describing: state))")
-//           }
-//       viewModel.refreshForecast()
-
-       WeatherRepository().getFullForecast { forecast, error in
-           guard let forecast = forecast else {
-               return
+       let viewModel = ForecastViewModel(weatherContract: WeatherRepository())
+       viewModel.forecastStateLiveData.addObserver { value in
+           if let state = value {
+               forecastState = state
            }
-           self.fullForecast = forecast.forecasts
        }
+       viewModel.refreshForecast()
     }
 }
 
@@ -38,6 +41,29 @@ struct ContentView_Previews: PreviewProvider {
 		ContentView()
 	}
 }
+
+struct LoadingView: View {
+    var body: some View {
+        ProgressView()
+    }
+}
+
+struct LoadedView: View {
+    let fullForecast: [Forecast]
+
+    var body: some View {
+        List(self.fullForecast, id: \.name) { forecast in
+            CardView(forecast: forecast)
+        }
+    }
+}
+
+struct FailedView: View {
+    var body: some View {
+        Text("Failed to download forecast.")
+    }
+}
+
 
 struct CardView: View {
     let forecast: Forecast

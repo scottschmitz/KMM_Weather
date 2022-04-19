@@ -1,0 +1,7 @@
+use_frameworks!
+platform :ios, '15.0'
+
+workspace 'project'
+target 'ios' do
+    pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.11.0'
+end

@@ -1,8 +1,6 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-
-    id("dev.icerock.moko.kswift") version "0.5.0"
 }
 
 kotlin {
@@ -33,9 +31,10 @@ kotlin {
 
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 
-                api("dev.icerock.moko:mvvm-core:0.12.0")
-                api("dev.icerock.moko:mvvm-livedata:0.12.0")
-                api("dev.icerock.moko:kswift-runtime:0.5.0")
+                implementation("dev.icerock.moko:mvvm-core:0.12.0")
+                implementation("dev.icerock.moko:mvvm-livedata:0.12.0")
+                implementation("dev.icerock.moko:mvvm-state:0.12.0")
+                implementation("dev.icerock.moko:mvvm-livedata-resources:0.12.0")
             }
         }
         val commonTest by getting {
