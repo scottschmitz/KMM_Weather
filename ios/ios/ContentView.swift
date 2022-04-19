@@ -36,18 +36,23 @@ struct CardView: View {
     let forecast: Forecast
 
     var body: some View {
-        HStack {
-            VStack {
+        HStack(spacing: .zero) {
+            VStack(alignment: .leading) {
                 Text(forecast.name)
                     .font(.headline)
                     .accessibilityAddTraits(.isHeader)
                 Text(forecast.shortForecast)
                     .font(.subheadline)
             }
-//            AsyncImage(url: URL(string: forecast.icon))
+            Spacer(minLength: 16)
+            AsyncImage(url: URL(string: forecast.icon)) { image in
+                image.resizable()
+            } placeholder: {
+                ProgressView()
+            }
+            .frame(width: 50, height: 50)
             Text("\(forecast.temperature)\(forecast.temperatureUnit)")
                 .font(.headline)
         }
-        .padding()
     }
 }

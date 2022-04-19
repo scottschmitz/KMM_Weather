@@ -12,9 +12,8 @@ import org.kodein.di.android.closestDI
 import org.kodein.di.android.x.viewmodel.viewModel
 
 class MainActivity : AppCompatActivity(), DIAware {
-  override val di by closestDI()
 
-//  val weatherViewModel by lazy { ViewModelFactory(di).create(WeatherViewModel::class.java) }
+  override val di by closestDI()
 
   val weatherViewModel: WeatherViewModel by viewModel()
   override fun onCreate(savedInstanceState: Bundle?) {

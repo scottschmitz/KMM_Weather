@@ -1,4 +1,4 @@
-package com.sschmitz.kmm.domain.model
+package com.sschmitz.kmm_weather.domain.model
 
 data class Forecast (
   val name: String,

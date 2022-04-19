@@ -1,6 +1,6 @@
 package com.sschmitz.kmm.data.model
 
-import com.sschmitz.kmm.domain.model.Forecast
+import com.sschmitz.kmm_weather.domain.model.Forecast
 import kotlinx.serialization.Serializable
 
 @Serializable

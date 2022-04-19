@@ -28,7 +28,7 @@ fun RootNavigation(
       )
     }
     composable(NavigationPath.FORECAST_DETAILS.route) {
-      ForecastDetailsScreen(null)
+      ForecastDetailsScreen()
     }
   }
 }

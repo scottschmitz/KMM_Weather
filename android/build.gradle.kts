@@ -27,17 +27,19 @@ android {
 
 dependencies {
     implementation(project(":app"))
-//    implementation("org.kodein.di:kodein-di-framework-android-x:7.10.0")
+
     implementation("org.kodein.di:kodein-di-framework-android-x-viewmodel:7.11.0")
     implementation("org.kodein.di:kodein-di-framework-compose:7.11.0")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.1.1")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
 
     implementation ("androidx.activity:activity-compose:1.4.0")
     implementation("androidx.compose.ui:ui:1.1.1")
     implementation("androidx.compose.material:material:1.1.1")
     implementation("androidx.compose.runtime:runtime-livedata:1.1.1")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
