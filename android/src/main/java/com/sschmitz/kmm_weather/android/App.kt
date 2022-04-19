@@ -1,6 +1,7 @@
 package com.sschmitz.kmm_weather.android
 
 import android.app.Application
+import com.sschmitz.kmm_weather.android.viewmodel.ViewModels
 import com.sschmitz.kmm_weather.data.di.Repositories
 import org.kodein.di.DI
 import org.kodein.di.DIAware

@@ -15,10 +15,10 @@ object Repositories {
   }
 }
 
-object RepositoriesInjector {
-  val kodeInContainer = DI.lazy {
-    importAll(Repositories.diContainer)
-  }
-
-  fun weatherContract() = kodeInContainer.direct.instance<WeatherContract>()
-}
+//object RepositoriesInjector {
+//  val kodeInContainer = DI.lazy {
+//    importAll(Repositories.diContainer)
+//  }
+//
+//  fun weatherContract() = kodeInContainer.direct.instance<WeatherContract>()
+//}

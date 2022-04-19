@@ -12,11 +12,18 @@ struct ContentView: View {
             CardView(forecast: forecast)
         }
         .onAppear {
-            getForecasts()
+            observeForecasts()
         }
 	}
 
-   func getForecasts() {
+   func observeForecasts() {
+//       let viewModel = ViewModelInjector().forecastViewModel()
+//       viewModel.forecastStateLiveData
+//           .addObserver { state in
+//               print("State go here: \(String(describing: state))")
+//           }
+//       viewModel.refreshForecast()
+
        WeatherRepository().getFullForecast { forecast, error in
            guard let forecast = forecast else {
                return

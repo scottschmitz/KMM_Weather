@@ -3,10 +3,19 @@ val ktorVersion = "1.6.8"
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+
+    id("dev.icerock.moko.kswift") version "0.5.0"
 }
 
 kotlin {
     android()
+
+    targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
+        binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
+            export("dev.icerock.moko:mvvm-core:0.12.0")
+            export("dev.icerock.moko:mvvm-livedata:0.12.0")
+        }
+    }
 
     listOf(
         iosX64(),
@@ -30,6 +39,10 @@ kotlin {
                 api(project(":data"))
                 api(project(":domain"))
                 api(project(":presentation"))
+
+                api("dev.icerock.moko:mvvm-core:0.12.0")
+                api("dev.icerock.moko:mvvm-livedata:0.12.0")
+                api("dev.icerock.moko:kswift-runtime:0.5.0")
             }
         }
         val commonTest by getting {
