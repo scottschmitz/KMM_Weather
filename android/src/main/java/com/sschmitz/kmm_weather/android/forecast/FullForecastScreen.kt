@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.LiveData
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.sschmitz.kmm_weather.domain.model.FullForecast
 import com.sschmitz.kmm_weather.android.forecast.ForecastList
 import com.sschmitz.kmm_weather.android.navigation.NavigationPath
@@ -23,23 +25,27 @@ fun FullForecastScreen(
   val default = ForecastState.Loading(null)
   val state: ForecastState by forecastStateLiveData.observeAsState(default)
 
-  refreshForecasts()
-
   Scaffold {
-    Surface {
-      when (val tempState = state) {
-        is ForecastState.Loading -> LoadingFullForecast(
-          previousFullForecast = tempState.previousForecast,
-          onNavigate = onNavigate
-        )
-        is ForecastState.Loaded -> LoadedFullForecast(
-          fullForecast = tempState.fullForecast,
-          onNavigate = onNavigate
-        )
-        is ForecastState.Failed -> FailedFullForecast(
-          previousFullForecast = tempState.previousForecast,
-          onNavigate = onNavigate
-        )
+    
+    SwipeRefresh(
+      state = rememberSwipeRefreshState(isRefreshing = state is ForecastState.Loading),
+      onRefresh = refreshForecasts
+    ) {
+      Surface {
+        when (val tempState = state) {
+          is ForecastState.Loading -> LoadingFullForecast(
+            previousFullForecast = tempState.previousForecast,
+            onNavigate = onNavigate
+          )
+          is ForecastState.Loaded -> LoadedFullForecast(
+            fullForecast = tempState.fullForecast,
+            onNavigate = onNavigate
+          )
+          is ForecastState.Failed -> FailedFullForecast(
+            previousFullForecast = tempState.previousForecast,
+            onNavigate = onNavigate
+          )
+        }
       }
     }
   }

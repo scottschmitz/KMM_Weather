@@ -1,4 +1,4 @@
-package com.sschmitz.kmm.data.model
+package com.sschmitz.kmm_weather.data.model
 
 import com.sschmitz.kmm_weather.domain.model.FullForecast
 import kotlinx.serialization.Serializable

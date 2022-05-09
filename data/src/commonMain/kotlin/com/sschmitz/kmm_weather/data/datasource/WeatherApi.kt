@@ -1,6 +1,8 @@
-package com.sschmitz.kmm.data.datasource
+package com.sschmitz.kmm_weather.data.datasource
 
-import com.sschmitz.kmm.data.model.FullForecastJson
+import com.sschmitz.kmm_weather.data.model.FullForecastJson
+import com.sschmitz.kmm_weather.data.model.PointsJson
+import com.sschmitz.kmm_weather.domain.contract.GridLocation
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
@@ -17,10 +19,13 @@ internal class WeatherApi {
     }
   }
 
+  suspend fun getGridLocation(latitude: Double, longitude: Double): PointsJson {
+    val address = "https://api.weather.gov/points/$latitude,$longitude"
+    return client.get(address)
+  }
 
-  private val address = "https://api.weather.gov/gridpoints/GRR/46,46/forecast"
-
-  suspend fun fullForecastForPoint(): FullForecastJson {
+  suspend fun fullForecastForPoint(gridLocation: GridLocation): FullForecastJson {
+    val address = "https://api.weather.gov/gridpoints/GRR/${gridLocation.x},${gridLocation.y}/forecast"
     return client.get(address)
   }
 }

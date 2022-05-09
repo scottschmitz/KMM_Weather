@@ -47,6 +47,11 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.0.0-rc03")
 
+    implementation("com.google.accompanist:accompanist-permissions:0.23.1")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.23.1")
+
+    implementation("com.google.android.gms:play-services-location:19.0.1")
+
 
 
 //    implementation("androidx.compose.ui:ui:1.1.1")

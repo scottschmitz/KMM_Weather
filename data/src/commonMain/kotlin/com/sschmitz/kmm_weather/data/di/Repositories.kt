@@ -1,12 +1,9 @@
 package com.sschmitz.kmm_weather.data.di
 
-import com.sschmitz.kmm.domain.contract.WeatherContract
-import com.sschmitz.kmm.data.repository.WeatherRepository
-import io.ktor.util.reflect.*
+import com.sschmitz.kmm_weather.domain.contract.WeatherContract
+import com.sschmitz.kmm_weather.data.repository.WeatherRepository
 import org.kodein.di.DI
 import org.kodein.di.bind
-import org.kodein.di.direct
-import org.kodein.di.instance
 import org.kodein.di.singleton
 
 object Repositories {
